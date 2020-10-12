@@ -19,16 +19,19 @@ public class MooShroomMountains extends Biome{
 	public MooShroomMountains(Builder biomeBuilder) {
 		super(biomeBuilder);
 		
+		// Mooshrooms
 		this.addSpawn(
 				EntityClassification.CREATURE,
 				new SpawnListEntry(EntityType.MOOSHROOM, 50, 3, 6));
 		
+		// Caves
 		this.addCarver(
 				GenerationStage.Carving.AIR,
 				Biome.createCarver(
 						WorldCarver.CAVE,
 						new ProbabilityConfig(0.14285710f))); // Default : 0.14285715f
 		
+		// Jungle Mushrooms
 		this.addFeature(
 				GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(
@@ -44,20 +47,28 @@ public class MooShroomMountains extends Biome{
 				GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_PATCH.withConfiguration(
 						DefaultBiomeFeatures.BROWN_MUSHROOM_CONFIG)
-				.withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP
+				.withPlacement(
+						Placement.COUNT_CHANCE_HEIGHTMAP
 						.configure(new HeightWithChanceConfig(5, 0.25F))));
 	    
 		this.addFeature(
 	    		GenerationStage.Decoration.VEGETAL_DECORATION,
 	    		Feature.RANDOM_PATCH.withConfiguration(
 	    				DefaultBiomeFeatures.RED_MUSHROOM_CONFIG)
-	    		.withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP_DOUBLE
+	    		.withPlacement(
+	    				Placement.COUNT_CHANCE_HEIGHTMAP_DOUBLE
 	    				.configure(new HeightWithChanceConfig(5, 0.125F))));
 	   
+		
 		DefaultBiomeFeatures.addLakes(this);
+		DefaultBiomeFeatures.addSedimentDisks(this);
+		
 		DefaultBiomeFeatures.addOres(this);
+		DefaultBiomeFeatures.addStoneVariants(this);
 		DefaultBiomeFeatures.addExtraGoldOre(this);
 		DefaultBiomeFeatures.addExtraEmeraldOre(this);
+
+		DefaultBiomeFeatures.addMonsterRooms(this);
 	}
 
 	

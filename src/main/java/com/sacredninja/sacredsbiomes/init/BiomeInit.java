@@ -36,11 +36,12 @@ public class BiomeInit {
 	
 	
 	public static void registerBiomes() {
-		registerBiome(MOOSHROOM_MOUNTAINS.get(), Type.MUSHROOM, Type.OVERWORLD);
+		registerBiome(MOOSHROOM_MOUNTAINS.get(), Type.MUSHROOM, Type.MAGICAL, Type.OVERWORLD);
 	}
 	
 	private static void registerBiome(Biome biome, Type... types) {
 		BiomeDictionary.addTypes(biome, types);
+		BiomeManager.addBiome(BiomeManager.BiomeType.COOL, new BiomeManager.BiomeEntry(biome, 100));
 		BiomeManager.addSpawnBiome(biome);
 	}
 }
