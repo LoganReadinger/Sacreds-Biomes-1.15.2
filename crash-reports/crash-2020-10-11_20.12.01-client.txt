@@ -1,0 +1,46 @@
+---- Minecraft Crash Report ----
+// Shall we play a game?
+
+Time: 10/11/20, 8:12 PM
+Description: Initializing game
+
+java.lang.NullPointerException: Cannot invoke "java.lang.Runnable.run()" because "tick" is null
+	at net.minecraftforge.fml.loading.BackgroundWaiter.runAndTick(BackgroundWaiter.java:32) ~[forge-1.15.2-31.2.0_mapped_snapshot_20200514-1.15.1-launcher.jar:31.2] {}
+	at net.minecraft.client.Minecraft.<init>(Minecraft.java:358) [forge-1.15.2-31.2.0_mapped_snapshot_20200514-1.15.1-recomp.jar:?] {}
+	at net.minecraft.client.main.Main.main(Main.java:141) [forge-1.15.2-31.2.0_mapped_snapshot_20200514-1.15.1-recomp.jar:?] {}
+	at mcp.client.Start.main(Start.java:17) [forge-1.15.2-31.2.0_mapped_snapshot_20200514-1.15.1-recomp.jar:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraftforge.fml.loading.BackgroundWaiter.runAndTick(BackgroundWaiter.java:32)
+	at net.minecraft.client.Minecraft.<init>(Minecraft.java:358)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.main.Main.main(Main.java:141)
+	at mcp.client.Start.main(Start.java:17)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.15.2
+	Minecraft Version ID: 1.15.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 14.0.2, Oracle Corporation
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 23430456 bytes (22 MB) / 71303168 bytes (68 MB) up to 8589934592 bytes (8192 MB)
+	CPUs: 12
+	JVM Flags: 2 total; -XX:+ShowCodeDetailsInExceptionMessages -Xmx8192m
+	Launched Version: mcp
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: NO CONTEXT
+	GL Caps: 
+	Using VBOs: Yes
+	Is Modded: Definitely; Client brand changed to 'forge'
+	Type: Client (map_client.txt)
+	CPU: <unknown>
