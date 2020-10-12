@@ -15,30 +15,19 @@ import net.minecraft.world.gen.placement.FrequencyConfig;
 import net.minecraft.world.gen.placement.HeightWithChanceConfig;
 import net.minecraft.world.gen.placement.Placement;
 
-public class TestBiome extends Biome{
-
-	public TestBiome(Builder biomeBuilder) {
+public class MooShroomMountains extends Biome{
+	public MooShroomMountains(Builder biomeBuilder) {
 		super(biomeBuilder);
 		
 		this.addSpawn(
 				EntityClassification.CREATURE,
-				new SpawnListEntry(EntityType.BEE, 20, 2, 5));
+				new SpawnListEntry(EntityType.MOOSHROOM, 50, 3, 6));
 		
 		this.addCarver(
 				GenerationStage.Carving.AIR,
 				Biome.createCarver(
 						WorldCarver.CAVE,
-						new ProbabilityConfig(0.14285715f)));
-		
-		this.addCarver(
-				GenerationStage.Carving.AIR,
-				Biome.createCarver(
-						WorldCarver.HELL_CAVE,
-						new ProbabilityConfig(0.02f)));
-		
-		this.addFeature(
-				GenerationStage.Decoration.UNDERGROUND_DECORATION,
-				Feature.FOSSIL.withConfiguration(IFeatureConfig.NO_FEATURE_CONFIG).withPlacement(Placement.CHANCE_PASSTHROUGH.configure(new ChanceConfig(128))));
+						new ProbabilityConfig(0.14285710f))); // Default : 0.14285715f
 		
 		this.addFeature(
 				GenerationStage.Decoration.VEGETAL_DECORATION,
@@ -49,27 +38,26 @@ public class TestBiome extends Biome{
 								.withConfiguration(DefaultBiomeFeatures.BIG_BROWN_MUSHROOM)))
 				.withPlacement(
 						Placement.COUNT_HEIGHTMAP
-						.configure(new FrequencyConfig(1))));
+						.configure(new FrequencyConfig(5))));
 	    
 		this.addFeature(
 				GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_PATCH.withConfiguration(
 						DefaultBiomeFeatures.BROWN_MUSHROOM_CONFIG)
 				.withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP
-						.configure(new HeightWithChanceConfig(1, 0.25F))));
+						.configure(new HeightWithChanceConfig(5, 0.25F))));
 	    
 		this.addFeature(
 	    		GenerationStage.Decoration.VEGETAL_DECORATION,
 	    		Feature.RANDOM_PATCH.withConfiguration(
 	    				DefaultBiomeFeatures.RED_MUSHROOM_CONFIG)
 	    		.withPlacement(Placement.COUNT_CHANCE_HEIGHTMAP_DOUBLE
-	    				.configure(new HeightWithChanceConfig(1, 0.125F))));
+	    				.configure(new HeightWithChanceConfig(5, 0.125F))));
 	   
+		DefaultBiomeFeatures.addLakes(this);
 		DefaultBiomeFeatures.addOres(this);
 		DefaultBiomeFeatures.addExtraGoldOre(this);
 		DefaultBiomeFeatures.addExtraEmeraldOre(this);
-		
-		
 	}
 
 	
