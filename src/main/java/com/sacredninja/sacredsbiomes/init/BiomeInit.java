@@ -1,6 +1,6 @@
 package com.sacredninja.sacredsbiomes.init;
 
-import com.sacredninja.sacredsbiomes.world.biomes.TestBiome;
+import com.sacredninja.sacredsbiomes.world.biomes.MooShroomMountains;
 
 import net.minecraft.block.Blocks;
 import net.minecraft.world.biome.Biome;
@@ -18,25 +18,25 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BiomeInit {
 	public static final DeferredRegister<Biome> BIOMES = new DeferredRegister<>(ForgeRegistries.BIOMES, "sacredsbiomes");
 	
-	public static final RegistryObject<Biome> TEST_BIOME = BIOMES.register("test_biome",
-			() -> new TestBiome(new Biome.Builder()
-				.precipitation(RainType.SNOW)
-				.scale(1.2f)
-				.temperature(0.5f)
-				.waterColor(0x03fcf8)
-				.waterFogColor(0xc9fffe)
+	public static final RegistryObject<Biome> MOOSHROOM_MOUNTAINS = BIOMES.register("mooshroom_mountains",
+			() -> new MooShroomMountains(new Biome.Builder()
+				.precipitation(RainType.RAIN)
+				.scale(1f) // 1
+				.temperature(0.7f) // Default : 0.5
+				.waterColor(0x571294)
+				.waterFogColor(0x342342)
 				.surfaceBuilder(SurfaceBuilder.DEFAULT, new SurfaceBuilderConfig(
-						Blocks.SNOW.getDefaultState(),
-						Blocks.DIRT.getDefaultState(),
-						Blocks.ACACIA_PLANKS.getDefaultState()))
-				.category(Category.PLAINS)
+					Blocks.MYCELIUM.getDefaultState(),
+					Blocks.DIRT.getDefaultState(),
+					Blocks.SAND.getDefaultState()))
+				.category(Category.MUSHROOM)
 				.downfall(0.5f)
-				.depth(0.12f)
+				.depth(0.2f)
 				.parent(null)));
 	
 	
 	public static void registerBiomes() {
-		registerBiome(TEST_BIOME.get(), Type.PLAINS, Type.OVERWORLD);
+		registerBiome(MOOSHROOM_MOUNTAINS.get(), Type.MUSHROOM, Type.OVERWORLD);
 	}
 	
 	private static void registerBiome(Biome biome, Type... types) {
