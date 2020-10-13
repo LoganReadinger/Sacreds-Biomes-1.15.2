@@ -31,7 +31,7 @@ public class MooShroomMountains extends Biome{
 						WorldCarver.CAVE,
 						new ProbabilityConfig(0.14285710f))); // Default : 0.14285715f
 		
-		// Jungle Mushrooms
+		// Mushrooms Trees
 		this.addFeature(
 				GenerationStage.Decoration.VEGETAL_DECORATION,
 				Feature.RANDOM_BOOLEAN_SELECTOR.withConfiguration(
