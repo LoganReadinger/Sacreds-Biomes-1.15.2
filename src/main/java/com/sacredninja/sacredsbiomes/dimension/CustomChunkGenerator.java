@@ -21,14 +21,21 @@ public class CustomChunkGenerator extends ChunkGenerator<CustomChunkGenerator.Co
     @Override
     public void generateSurface(WorldGenRegion region, IChunk chunk) {
         BlockState bedrock = Blocks.BEDROCK.getDefaultState();
+        BlockState grass = Blocks.GRASS_BLOCK.getDefaultState();
+        BlockState dirt = Blocks.DIRT.getDefaultState();
         BlockState stone = Blocks.STONE.getDefaultState();
         ChunkPos chunkpos = chunk.getPos();
         BlockPos.Mutable pos = new BlockPos.Mutable();
+        
         PerlinNoiseAlgorithm perlin = new PerlinNoiseAlgorithm();
-
+        double frequency = 128;
+        double amplitude = 2;
+        
+        
         int x;
         int z;
 
+        
         // y=0 for bedrock layer
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
@@ -44,14 +51,25 @@ public class CustomChunkGenerator extends ChunkGenerator<CustomChunkGenerator.Co
                 
                 
                 // Perlin terrain generation
-                //int height = (int) perlin.perlin(realx, 20, realz) * 10;
+                int height = (int) (65 + (perlin.perlinHalf(realx / frequency, 0.5, realz / frequency) * amplitude));
                 
                 // Cosine terrain generation
-                int height = (int) (65 + Math.cos(realx / 20.0f)*10 + Math.cos(realz / 20.0f)*10);
+                //int height = (int) (65 + Math.cos(realx / 20.0f)*10 + Math.cos(realz / 20.0f)*10);
                 
                 // place stone based on y value
                 for (int y = 1 ; y < height ; y++) {
-                    chunk.setBlockState(pos.setPos(x, y, z), stone, false);
+                	
+                	if (y == height-1) {
+                    	chunk.setBlockState(pos.setPos(x, y, z), grass, false);
+                	}else if (y == height-2) {
+                    	chunk.setBlockState(pos.setPos(x, y, z), dirt, false);
+                	}else if (y == height-3){
+                    	chunk.setBlockState(pos.setPos(x, y, z), dirt, false);
+                	}else if (y == height-4){
+                    	chunk.setBlockState(pos.setPos(x, y, z), dirt, false);
+                	}else {
+                        chunk.setBlockState(pos.setPos(x, y, z), stone, false);                		
+                	}                    
                 }
             }
         }

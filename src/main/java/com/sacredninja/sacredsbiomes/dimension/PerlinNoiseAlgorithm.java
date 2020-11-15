@@ -148,13 +148,13 @@ public class PerlinNoiseAlgorithm {
 	public double perlinHalf(double x, double y, double z){
 		if (repeat > 0){
 			// If we have any repeat on, change the coordinates to their
-			// â€œlocalâ€� repetitions.
+			// local repetitions.
 			x = x % repeat;
 			y = y % repeat;
 			z = z % repeat;
 		}
 
-		// Calculate the â€œunit cubeâ€� that the point asked will be located in.
+		// Calculate the unit cube that the point asked will be located in.
 		// The left bound is (|_x_|, |_y_|, |_z_|) and the right bound is
 		// that plus 1. Next we calculate the location (from 0.0 to 1.0) in
 		// that cube. We also fade the location to smooth the result.
@@ -240,10 +240,10 @@ public class PerlinNoiseAlgorithm {
 	public static double fade(double t)
 	{
 		// Fade function as defined by Ken Perlin. This eases coordinate
-		// values so that they will â€œeaseâ€� towards integral values. This
+		// values so that they will ease towards integral values. This
 		// ends up smoothing the final output.
 
-		// 6tâ�µ âˆ’ 15tâ�´ + 10tÂ³:
+		// 6t^5-15t^4+10t^3:
 		return t * t * t * (t * (t * 6 - 15) + 10);
 	}
 
