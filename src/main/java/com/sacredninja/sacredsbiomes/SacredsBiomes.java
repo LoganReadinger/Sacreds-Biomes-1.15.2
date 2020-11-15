@@ -3,15 +3,19 @@ package com.sacredninja.sacredsbiomes;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.sacredninja.sacredsbiomes.setup.ClientSetup;
+import com.sacredninja.sacredsbiomes.setup.Config;
+import com.sacredninja.sacredsbiomes.setup.ModSetup;
+import com.sacredninja.sacredsbiomes.setup.Registration;
 import com.sacredninja.sacredsbiomes.init.BiomeInit;
 
 import net.minecraft.world.biome.Biome;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -24,20 +28,15 @@ public class SacredsBiomes{
     public static final String MOD_ID = "sacredsbiomes";
     public static SacredsBiomes instance;
     
-    public SacredsBiomes() {
-    	final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modEventBus.addListener(this::setup);
-        modEventBus.addListener(this::doClientStuff);
+    public SacredsBiomes() {   
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_CONFIG);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, Config.SERVER_CONFIG);
 
-    	
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        Registration.init();
 
-        
-        BiomeInit.BIOMES.register(modEventBus);
-        
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
+        // Register the setup method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ModSetup::init);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(ClientSetup::init);
     }
 
     @SubscribeEvent

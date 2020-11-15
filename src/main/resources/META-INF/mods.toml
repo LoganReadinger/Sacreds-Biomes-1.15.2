@@ -14,7 +14,7 @@ loaderVersion="[31,)"
 modId="sacredsbiomes"
 
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="0.1"
+version="1.0"
 
 # A display name for the mod
 displayName="Sacreds Biomes"
@@ -29,14 +29,14 @@ displayName="Sacreds Biomes"
 logoFile="examplemod.png"
 
 # A text field displayed in the mod UI
-credits="TurtyWurty for the Youtube Tutorial"
+credits=""
 
 # A text field displayed in the mod UI
 authors="Logan Readinger (SacredNinja)"
 
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This mod contains custom biomes that were made for my Senior Capstone Project.
+This mod contains a custom dimension made with Perlin Noise for my Senior Capstone Project.
 '''
 
 
