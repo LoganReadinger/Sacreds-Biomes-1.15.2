@@ -28,13 +28,11 @@ public class CustomChunkGenerator extends ChunkGenerator<CustomChunkGenerator.Co
         BlockPos.Mutable pos = new BlockPos.Mutable();
         
         PerlinNoiseAlgorithm perlin = new PerlinNoiseAlgorithm();
-        double frequency = 128;
-        double amplitude = 2;
-        
-        
+        double frequency = 90; // size of unit cube
+        double amplitude = 100; // relative height modifier
+        int height = 0;
         int x;
         int z;
-
         
         // y=0 for bedrock layer
         for (x = 0; x < 16; x++) {
@@ -46,17 +44,22 @@ public class CustomChunkGenerator extends ChunkGenerator<CustomChunkGenerator.Co
         // y=height for stone layers
         for (x = 0; x < 16; x++) {
             for (z = 0; z < 16; z++) {
-                int realx = chunkpos.x * 16 + x;
-                int realz = chunkpos.z * 16 + z;
+                double realx = Math.abs(chunkpos.x) * 16 + x;
+                double realz = Math.abs(chunkpos.z) * 16 + z;
                 
-                
-                // Perlin terrain generation
-                int height = (int) (65 + (perlin.perlinHalf(realx / frequency, 0.5, realz / frequency) * amplitude));
+                // Perlin for Height + minHeight blocks 
+                height = (int) (amplitude * (perlin.perlinHalf(realx / frequency, 2, realz / frequency)));
                 
                 // Cosine terrain generation
-                //int height = (int) (65 + Math.cos(realx / 20.0f)*10 + Math.cos(realz / 20.0f)*10);
+                // height = (int) (65 + Math.cos(realx / 20.0f)*10 + Math.cos(realz / 20.0f)*10);
+
+                // Sine terrain generation
+                // height = (int) (65 + Math.sin(realx / 20.0f)*10 + Math.sin(realz / 20.0f)*10);
                 
-                // place stone based on y value
+                // Tangent terrain generation
+                // height = (int) (65 + Math.tan(realx / 20.0f)*10 + Math.tan(realz / 20.0f)*10);
+                
+                // Top layer grass, 3 layers under dirt, the rest stone
                 for (int y = 1 ; y < height ; y++) {
                 	
                 	if (y == height-1) {

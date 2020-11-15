@@ -32,32 +32,12 @@ public class PerlinNoiseAlgorithm {
 	}
 
 	public int repeat;
+	
 	public PerlinNoiseAlgorithm() {
 		repeat = -1; 
 	}
 	public PerlinNoiseAlgorithm(int repeat) { 
 		this.repeat = repeat; 
-	}
-
-	public double octavePerlin(double x, double y, double z, int octaves, double persistence){
-		double total = 0;
-		double frequency = 1;
-		double amplitude = 1;
-
-		// Used to normalize the result to the range âŸ¨âˆ’1.0, 1.0âŸ©.
-		double maxValue = 0;
-
-		for (int i = 0; i < octaves; ++i){
-			total += perlin(x * frequency, y * frequency,
-				z * frequency) * amplitude;
-
-			maxValue += amplitude;
-
-			amplitude *= persistence;
-			frequency *= 2;
-		}
-
-		return total / maxValue;
 	}
 
 	// The noise within the range -1, 1.
@@ -70,7 +50,7 @@ public class PerlinNoiseAlgorithm {
 			z = z % repeat;
 		}
 
-		// Calculate the â€œunit cubeâ€� that the point asked will be located in.
+		// Calculate the unit cube that the point asked will be located in.
 		// The left bound is (|_x_|, |_y_|, |_z_|) and the right bound is
 		// that plus 1. Next we calculate the location (from 0.0 to 1.0) in
 		// that cube. We also fade the location to smooth the result.
@@ -120,28 +100,6 @@ public class PerlinNoiseAlgorithm {
 		double y2 = lerp(x1, x2, v);
 
 		return lerp(y1, y2, w);
-	}
-
-	public double octavePerlinHalf(double x, double y, double z, int octaves, double persistence){
-		double total = 0;
-		double frequency = 1;
-		double amplitude = 1;
-
-		// Used to normalize the result to the range âŸ¨0.0, 1.0âŸ©.
-		double maxValue = 0;
-
-		for (int i = 0; i < octaves; ++i)
-		{
-			total += perlinHalf(x * frequency, y * frequency,
-				z * frequency) * amplitude;
-
-			maxValue += amplitude;
-
-			amplitude *= persistence;
-			frequency *= 2;
-		}
-
-		return total / maxValue;
 	}
 
 	// This version bounds the output range to 0, 1 for convenience.

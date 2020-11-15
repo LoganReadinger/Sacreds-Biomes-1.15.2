@@ -18,7 +18,7 @@ public class DimensionTeleportCommand implements Command<CommandSource> {
     private static final DimensionTeleportCommand CMD = new DimensionTeleportCommand();
 
     public static ArgumentBuilder<CommandSource, ?> register(CommandDispatcher<CommandSource> dispatcher) {
-        return Commands.literal("perlinnoise")
+        return Commands.literal("perlin_noise")
                 .requires(cs -> cs.hasPermissionLevel(0))
                 .executes(CMD);
     }
@@ -27,11 +27,12 @@ public class DimensionTeleportCommand implements Command<CommandSource> {
     public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
         ServerPlayerEntity player = context.getSource().asPlayer();
         int x = player.getPosition().getX();
+        int y = player.getPosition().getY();
         int z = player.getPosition().getZ();
         if (player.dimension.equals(ModDimensions.DIMENSION_TYPE)) {
-            TeleportationTools.teleport(player, DimensionType.OVERWORLD, new BlockPos(x, 200, z));
+            TeleportationTools.teleport(player, DimensionType.OVERWORLD, new BlockPos(x, Math.min(75,y), z));
         } else {
-            TeleportationTools.teleport(player, ModDimensions.DIMENSION_TYPE, new BlockPos(x, 200, z));
+            TeleportationTools.teleport(player, ModDimensions.DIMENSION_TYPE, new BlockPos(x, Math.min(75, y), z));
         }
         return 0;
     }
